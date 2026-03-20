@@ -1,4 +1,3 @@
-cat > install.sh << 'MAINEOF'
 #!/bin/bash
 set -e
 
@@ -100,6 +99,5 @@ echo "Commands:"
 echo "  metrics           - View all metrics"
 echo "  metrics-live      - Live auto-refresh mode"
 echo ""
-MAINEOF
 
 chmod +x install.sh
