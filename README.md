@@ -220,17 +220,12 @@ REFRESH_INTERVAL = 5  # seconds
 
 **Solution:**
 
-1. Check if MTProtoMax is running:
-   ```bash
-   systemctl status mtprotomax
-   ```
-
-2. Verify metrics endpoint:
+1. Verify metrics endpoint:
    ```bash
    curl http://localhost:9090/metrics
    ```
 
-3. Check MTProtoMax configuration for metrics port
+2. Check MTProtoMax configuration for metrics port
 
 ### Python dependencies error
 
