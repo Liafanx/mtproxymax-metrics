@@ -216,18 +216,12 @@ REFRESH_INTERVAL = 5  # секунды
 **Проблема:** `Error fetching metrics: Connection refused`
 
 **Решение:**
-
-1. Проверьте, работает ли MTProtoMax:
-   ```bash
-   systemctl status mtprotomax
-   ```
-
-2. Проверьте endpoint метрик:
+1. Проверьте endpoint метрик:
    ```bash
    curl http://localhost:9090/metrics
    ```
 
-3. Проверьте конфигурацию MTProtoMax на порт метрик
+2. Проверьте конфигурацию MTProtoMax на порт метрик
 
 ### Ошибка Python зависимостей
 
