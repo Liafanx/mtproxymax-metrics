@@ -1,70 +1,74 @@
-#!/bin/bash
+```bash
+#!/usr/bin/env bash
 set -e
 
-# Colors
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
-NC='\033[0m'
-
-echo -e "${BLUE}================================================${NC}"
-echo -e "${BLUE}  MTProtoMax Metrics Viewer - Installer v1.0${NC}"
-echo -e "${BLUE}================================================${NC}"
+echo "================================================"
+echo "  MTProtoMax Metrics Viewer - Installer v1.0"
+echo "================================================"
 echo ""
 
-# Check root
-if [[ $EUID -ne 0 ]]; then
-   echo -e "${RED}Error: Run as root${NC}"
+if [ "$EUID" -ne 0 ]; then
+   echo "ERROR: Please run as root"
    echo "Usage: sudo bash install.sh"
    exit 1
 fi
 
-# Install dependencies
-echo -e "${BLUE}Installing dependencies...${NC}"
-apt update -qq
-apt install -y python3 python3-pip python3-venv curl > /dev/null 2>&1
-echo -e "${GREEN}OK: Dependencies installed${NC}"
+echo "[1/6] Installing system dependencies..."
+apt-get update -qq > /dev/null 2>&1
+apt-get install -y python3 python3-pip python3-venv curl wget > /dev/null 2>&1
+echo "       OK"
 
-# Check if directory exists
 INSTALL_DIR="/root/Metrics"
+
 if [ -d "$INSTALL_DIR" ]; then
-    echo -e "${RED}Directory $INSTALL_DIR already exists${NC}"
+    echo ""
+    echo "WARNING: Directory $INSTALL_DIR already exists"
     read -p "Remove and reinstall? (y/n): " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         rm -rf "$INSTALL_DIR"
+        echo "Removed old installation"
     else
-        exit 1
+        echo "Installation cancelled"
+        exit 0
     fi
 fi
 
-# Create directory
+echo ""
+echo "[2/6] Creating directory structure..."
 mkdir -p "$INSTALL_DIR"
 cd "$INSTALL_DIR"
+echo "       OK"
 
-# Create virtual environment
-echo -e "${BLUE}Creating Python virtual environment...${NC}"
+echo "[3/6] Setting up Python virtual environment..."
 python3 -m venv venv
 source venv/bin/activate
 pip install --quiet --upgrade pip
 pip install --quiet requests rich
 deactivate
-echo -e "${GREEN}OK: Virtual environment ready${NC}"
+echo "       OK"
 
-# Download Python scripts from GitHub
-echo -e "${BLUE}Downloading metrics scripts...${NC}"
+echo "[4/6] Downloading viewer scripts..."
+curl -sSL -o "$INSTALL_DIR/metrics_viewer.py" \
+  https://raw.githubusercontent.com/Liafanx/mtproxymax-metrics/main/src/metrics_viewer.py
+curl -sSL -o "$INSTALL_DIR/metrics_live.py" \
+  https://raw.githubusercontent.com/Liafanx/mtproxymax-metrics/main/src/metrics_live.py
 
-curl -sSL https://raw.githubusercontent.com/Liafanx/mtproxymax-metrics/main/src/metrics_viewer.py -o "$INSTALL_DIR/metrics_viewer.py"
-curl -sSL https://raw.githubusercontent.com/Liafanx/mtproxymax-metrics/main/src/metrics_live.py -o "$INSTALL_DIR/metrics_live.py"
+if [ ! -f "$INSTALL_DIR/metrics_viewer.py" ]; then
+    echo "ERROR: Failed to download metrics_viewer.py"
+    exit 1
+fi
+
+if [ ! -f "$INSTALL_DIR/metrics_live.py" ]; then
+    echo "ERROR: Failed to download metrics_live.py"
+    exit 1
+fi
 
 chmod +x "$INSTALL_DIR/metrics_viewer.py"
 chmod +x "$INSTALL_DIR/metrics_live.py"
+echo "       OK"
 
-echo -e "${GREEN}OK: Scripts downloaded${NC}"
-
-# Create wrapper scripts
-echo -e "${BLUE}Creating wrapper scripts...${NC}"
-
+echo "[5/6] Creating wrapper scripts..."
 cat > "$INSTALL_DIR/metrics" << 'WRAPPER1'
 #!/bin/bash
 cd /root/Metrics
@@ -84,20 +88,27 @@ deactivate
 WRAPPER2
 
 chmod +x "$INSTALL_DIR/metrics-live"
+echo "       OK"
 
-# Create symlinks
-echo -e "${BLUE}Creating global symlinks...${NC}"
+echo "[6/6] Creating global commands..."
 ln -sf "$INSTALL_DIR/metrics" /usr/local/bin/metrics
 ln -sf "$INSTALL_DIR/metrics-live" /usr/local/bin/metrics-live
+echo "       OK"
 
 echo ""
-echo -e "${GREEN}================================================${NC}"
-echo -e "${GREEN}  Installation completed successfully!${NC}"
-echo -e "${GREEN}================================================${NC}"
+echo "================================================"
+echo "  Installation completed successfully!"
+echo "================================================"
 echo ""
-echo "Commands:"
-echo "  metrics           - View all metrics"
-echo "  metrics-live      - Live auto-refresh mode"
+echo "Usage:"
+echo "  metrics              - View all metrics"
+echo "  metrics-live         - Live auto-refresh mode"
+echo "  metrics --section    - View specific section"
 echo ""
-
-chmod +x install.sh
+echo "Examples:"
+echo "  metrics"
+echo "  metrics --section status"
+echo "  metrics --section users"
+echo ""
+echo "Documentation: https://github.com/Liafanx/mtproxymax-metrics"
+echo ""
