@@ -1,25 +1,30 @@
-# MTProtoMax Metrics Viewer
+# MTProxyMax Metrics Viewer
 
 > 🌍 **Translations:** [English](README.md) | [Русский](README_RU.md)
 
-Beautiful terminal dashboard for monitoring [MTProtoMax](https://github.com/SamNet-dev/MTProxyMax) Telegram proxy with Prometheus metrics.
+Beautiful terminal dashboard for monitoring [MTProxyMax](https://github.com/SamNet-dev/MTProxyMax) Telegram proxy with Prometheus metrics.
 
 [![Version](https://img.shields.io/badge/version-1.0-blue.svg)](https://github.com/Liafanx/mtproxymax-metrics)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![MTProtoMax](https://img.shields.io/badge/MTProtoMax-required-orange.svg)](https://github.com/SamNet-dev/MTProxyMax)
+[![MTProxyMax](https://img.shields.io/badge/MTProxyMax-required-orange.svg)](https://github.com/SamNet-dev/MTProxyMax)
 
 ## 📋 Table of Contents
 
-- [Features](#features)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Uninstall](#uninstall)
-- [Configuration](#configuration)
-- [Troubleshooting](#troubleshooting)
-- [Screenshots](#screenshots)
-- [Contributing](#contributing)
-- [License](#license)
+- [Features](#-features)
+- [Requirements](#-requirements)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Reinstall](#-reinstall)
+- [Uninstall](#-uninstall)
+- [Configuration](#-configuration)
+- [Troubleshooting](#-troubleshooting)
+- [Screenshots](#-screenshots)
+- [Metrics Reference](#-metrics-reference)
+- [License](#-license)
+- [Related Projects](#-related-projects)
+- [Support](#-support)
+- [Important Notes](#-important-notes)
+- [Changelog](#-changelog)
 
 ## ✨ Features
 
@@ -33,16 +38,16 @@ Beautiful terminal dashboard for monitoring [MTProtoMax](https://github.com/SamN
 
 ## 📦 Requirements
 
-> ⚠️ **Important:** This tool requires [MTProtoMax](https://github.com/SamNet-dev/MTProxyMax) to be installed and running with Prometheus metrics enabled.
+> ⚠️ **Important:** This tool requires [MTProxyMax](https://github.com/SamNet-dev/MTProxyMax) to be installed and running with Prometheus metrics enabled.
 
 ### System Requirements
 
 - **Operating System:** Ubuntu 22.04/24.04 or Debian 11/12
 - **Python:** 3.10 or higher
 - **Access:** Root/sudo privileges
-- **MTProtoMax:** [Install MTProtoMax first](https://github.com/SamNet-dev/MTProxyMax)
+- **MTProxyMax:** [Install MTProxyMax first](https://github.com/SamNet-dev/MTProxyMax)
 
-### Check if MTProtoMax metrics are available
+### Check if MTProxyMax metrics are available
 
 ```bash
 curl http://localhost:9090/metrics
@@ -137,7 +142,7 @@ metrics --section main
 
 ### Custom Metrics URL
 
-If your MTProtoMax metrics are on a different host/port:
+If your MTProxyMax metrics are on a different host/port:
 
 ```bash
 metrics --url http://your-server:9090/metrics
@@ -225,7 +230,7 @@ REFRESH_INTERVAL = 5  # seconds
    curl http://localhost:9090/metrics
    ```
 
-2. Check MTProtoMax configuration for metrics port
+2. Check MTProxyMax configuration for metrics port
 
 ### Python dependencies error
 
@@ -277,32 +282,32 @@ sudo chmod +x /root/Metrics/metrics*
 ```
 ================================================
   PROMETHEUS METRICS VIEWER
-  MTProtoMax proxy metrics dashboard
+  MTProxyMax proxy metrics dashboard
 ================================================
 
 ┌─ Summary ──────────────────────────────────┐
 │ Status: OK EXCELLENT                       │
-│ Uptime: 2d 15h 42m                        │
+│ Uptime: 2d 15h 42m                         │
 │                                            │
 │ Connections:                               │
-│   Total:      45,892                      │
-│   Authorized: 8,234 (17.9%)               │
-│   Rejected:   37,658 (no valid secret)    │
+│   Total:      45,892                       │
+│   Authorized: 8,234 (17.9%)                │
+│   Rejected:   37,658 (no valid secret)     │
 │                                            │
 │ Upstream:                                  │
-│   Attempts: 125,678                       │
-│   Success:  124,890                       │
-│   Failed:   788                           │
-│   Rate:     99.4%                         │
+│   Attempts: 125,678                        │
+│   Success:  124,890                        │
+│   Failed:   788                            │
+│   Rate:     99.4%                          │
 └────────────────────────────────────────────┘
 
 ┌─ User Statistics ──────────────────────────┐
-│ User    │ Connections │ Active │ RX      │
-├─────────┼─────────────┼────────┼─────────┤
-│ admin   │ 25,234      │ 15     │ 45.2 GB │
-│ user1   │ 18,456      │ 8      │ 32.1 GB │
-│ user2   │ 12,890      │ 3      │ 18.5 GB │
-└─────────┴─────────────┴────────┴─────────┘
+│ User    │ Connections │ Active │ RX       │
+├─────────┼─────────────┼────────┼──────────┤
+│ admin   │ 25,234      │ 15     │ 45.2 GB  │
+│ user1   │ 18,456      │ 8      │ 32.1 GB  │
+│ user2   │ 12,890      │ 3      │ 18.5 GB  │
+└─────────┴─────────────┴────────┴──────────┘
 ```
 
 ### Live Mode
@@ -327,8 +332,7 @@ Real-time auto-refreshing dashboard with color-coded status indicators.
 | `telemt_user_msgs_from_client` | Messages received per user |
 | `telemt_user_msgs_to_client` | Messages sent per user |
 
-For complete metrics documentation, see [MTProtoMax Documentation](https://github.com/SamNet-dev/MTProxyMax).
-
+For complete metrics documentation, see [MTProxyMax Documentation](https://github.com/SamNet-dev/MTProxyMax).
 
 ## 📄 License
 
@@ -336,7 +340,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔗 Related Projects
 
-- **[MTProtoMax](https://github.com/SamNet-dev/MTProxyMax)** - Fast and secure MTProto proxy (Required)
+- **[MTProxyMax](https://github.com/SamNet-dev/MTProxyMax)** - Fast and secure MTProto proxy (Required)
 - **[Prometheus](https://prometheus.io/)** - Monitoring and alerting toolkit
 
 ## 💬 Support
@@ -348,8 +352,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## ⚠️ Important Notes
 
-1. **MTProtoMax Required:** This viewer only works with [MTProtoMax](https://github.com/SamNet-dev/MTProxyMax). Install it first.
-2. **Metrics must be enabled:** Ensure Prometheus metrics are enabled in MTProtoMax configuration.
+1. **MTProxyMax Required:** This viewer only works with [MTProxyMax](https://github.com/SamNet-dev/MTProxyMax). Install it first.
+2. **Metrics must be enabled:** Ensure Prometheus metrics are enabled in MTProxyMax configuration.
 3. **Default port 9090:** If you changed the metrics port, use `--url` flag.
 4. **Root access:** Installation requires root/sudo privileges.
 
@@ -368,7 +372,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👤 Author
 
-Created for the MTproxyMax.
+Created for the MTProxyMax community.
 
 ## 🌟 Show Your Support
 
@@ -378,10 +382,9 @@ If this project helped you, please consider:
 
 ---
 
-**Made with ❤️ for the Telegram MTProtoMax**
+**Made with ❤️ for the Telegram MTProxyMax**
 
 🌍 **Available in:** [English](README.md) | [Русский](README_RU.md)
 
-[🔝 Back to top](#mtprotomax-metrics-viewer)
+[🔝 Back to top](#mtproxymax-metrics-viewer)
 ```
-
