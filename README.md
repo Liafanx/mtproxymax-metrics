@@ -359,7 +359,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🔗 Related Projects
 
 - **[MTProtoMax](https://github.com/SamNet-dev/MTProxyMax)** - Fast and secure MTProto proxy (Required)
-- **[MTProtoProxy](https://github.com/alexbers/mtprotoproxy)** - Original Python MTProto proxy
 - **[Prometheus](https://prometheus.io/)** - Monitoring and alerting toolkit
 
 ## 💬 Support
@@ -391,7 +390,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👤 Author
 
-Created for the MTProtoMax community.
+Created for the MTproxyMax.
 
 ## 🌟 Show Your Support
 
@@ -404,28 +403,8 @@ If this project helped you, please consider:
 
 ---
 
-**Made with ❤️ for the Telegram MTProto proxy community**
+**Made with ❤️ for the Telegram MTproxyMax**
 
 [🔝 Back to top](#mtprotomax-metrics-viewer)
 ```
 
----
-
-## ✅ Что включено в README:
-
-✅ Красивый header с бейджами  
-✅ Table of Contents (навигация)  
-✅ **Обязательное** требование MTProtoMax  
-✅ Команда установки в формате `bash -c "$(curl ...)"`  
-✅ Команда переустановки  
-✅ Команда удаления  
-✅ Все основные команды использования  
-✅ Примеры всех секций  
-✅ Troubleshooting (решение проблем)  
-✅ Screenshots (примеры вывода)  
-✅ Таблица метрик  
-✅ Contributing guide  
-✅ Ссылка на MTProtoMax проект  
-✅ License, Changelog, Support  
-
-Просто скопируйте весь текст выше и вставьте в README.md на GitHub! 🎉
