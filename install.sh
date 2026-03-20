@@ -22,15 +22,22 @@ INSTALL_DIR="/root/Metrics"
 if [ -d "$INSTALL_DIR" ]; then
     echo ""
     echo "WARNING: Directory $INSTALL_DIR already exists"
-    read -p "Remove and reinstall? (y/n): " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        rm -rf "$INSTALL_DIR"
-        echo "Removed old installation"
+    
+    # Если stdin это терминал, спрашиваем пользователя
+    if [ -t 0 ]; then
+        read -p "Remove and reinstall? (y/n): " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            echo "Installation cancelled"
+            exit 0
+        fi
     else
-        echo "Installation cancelled"
-        exit 0
+        # Если через pipe - автоматически удаляем
+        echo "Auto-removing for reinstallation..."
     fi
+    
+    rm -rf "$INSTALL_DIR"
+    echo "Removed old installation"
 fi
 
 echo ""
