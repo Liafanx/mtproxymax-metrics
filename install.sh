@@ -22,33 +22,39 @@ INSTALL_DIR="/root/Metrics"
 if [ -d "$INSTALL_DIR" ]; then
     echo ""
     echo "================================================"
-    echo "  Existing installation found at:"
-    echo "  $INSTALL_DIR"
+    echo "  WARNING: Existing installation found!"
     echo "================================================"
     echo ""
+    echo "Directory: $INSTALL_DIR"
+    echo ""
+    echo "Options:"
+    echo "  1) Remove and reinstall (recommended)"
+    echo "  2) Cancel installation"
+    echo ""
     
-    while true; do
-        read -p "Remove and reinstall? (y/n): " yn < /dev/tty
-        case $yn in
-            [Yy]* )
-                echo ""
-                echo "Removing old installation..."
-                rm -rf "$INSTALL_DIR"
-                rm -f /usr/local/bin/metrics
-                rm -f /usr/local/bin/metrics-live
-                echo "Done"
-                break
-                ;;
-            [Nn]* )
-                echo ""
-                echo "Installation cancelled"
-                exit 0
-                ;;
-            * )
-                echo "Please answer y or n"
-                ;;
-        esac
-    done
+    # Читаем из /dev/tty чтобы работало через pipe
+    read -p "Your choice (1 or 2): " choice < /dev/tty
+    
+    case $choice in
+        1)
+            echo ""
+            echo "Removing old installation..."
+            rm -rf "$INSTALL_DIR"
+            rm -f /usr/local/bin/metrics
+            rm -f /usr/local/bin/metrics-live
+            echo "OK - Old installation removed"
+            ;;
+        2)
+            echo ""
+            echo "Installation cancelled by user"
+            exit 0
+            ;;
+        *)
+            echo ""
+            echo "Invalid choice. Installation cancelled"
+            exit 1
+            ;;
+    esac
 fi
 
 echo ""
@@ -108,12 +114,19 @@ echo "       OK"
 
 echo ""
 echo "================================================"
-echo "  Installation completed!"
+echo "  Installation completed successfully!"
 echo "================================================"
 echo ""
-echo "Quick start:"
-echo "  metrics         - view metrics"
-echo "  metrics-live    - live mode"
+echo "Available commands:"
+echo "  metrics              - View all metrics"
+echo "  metrics-live         - Live auto-refresh mode"
 echo ""
-echo "More info: github.com/Liafanx/mtproxymax-metrics"
+echo "Usage examples:"
+echo "  metrics"
+echo "  metrics --section status"
+echo "  metrics --section users"
+echo "  metrics-live"
+echo ""
+echo "Documentation:"
+echo "  https://github.com/Liafanx/mtproxymax-metrics"
 echo ""
